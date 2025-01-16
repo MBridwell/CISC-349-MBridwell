@@ -1,19 +1,30 @@
 package com.example.geoquiz;
 
+
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
+    public static final String EXTRA_MESSAGE = "Received";
+    private static final String KEY_INDEX = "Index";
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
     private TextView mQuestionTextView;
+    private Button mCheatButton;
+    private static final int REQUEST_CODE_CHEAT = 0;
+
+
 
     private Question[]mQuestionBank = new Question[]{
             new Question(R.string.question_australia, true),
@@ -24,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_asia, true),
     };
     private int mCurrentIndex = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +43,36 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+
+
+
+
+
+            mCheatButton = (Button)findViewById(R.id.cheat_button);
+            mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent i = new Intent(MainActivity.this, CheatActivity.class);
+                String message = "Hello from MainActivity";
+                i.putExtra(EXTRA_MESSAGE, message);
+                startActivityForResult(i, REQUEST_CODE_CHEAT);
+
+            }
+        });
+
+            if (savedInstanceState != null) {
+                mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            }
+            updateQuestion();
+
+
+
+
+
         mTrueButton = (Button) findViewById(R.id.true_button);
+
         mTrueButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -57,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         });
         updateQuestion();
     }
+
+
+
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
@@ -72,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
                 .show();
     }
+
 }
+
+
 
 
