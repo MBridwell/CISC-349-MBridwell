@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -199,6 +200,10 @@ public class MainActivity extends AppCompatActivity {
                     num2 = "";
                     operator = "";
                     //wipe
+
+
+                    String messageResId = "Cleared!";
+                    Toast.makeText(v.getContext(), messageResId, Toast.LENGTH_SHORT).show();
                     CalculatorSpace.setText("Type a Calculation!");
 
                     return true;
