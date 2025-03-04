@@ -1,15 +1,19 @@
 package com.example.calculatorproject;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     //buttons
@@ -31,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     Button ButtonAdd;
     //empty calc space
     TextView CalculatorSpace;
+    String num1 = "";
+    String num2 = "";
+    String operator = "";
+    Button lastclicked = null;
 
 
 
@@ -40,13 +48,8 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        Integer num1Real = null;
-        Integer num2Real = null;
 
-        String operator = null;
-        while (num1Real == null && operator == null){
-            //make op button unclickable
-        }
+
 
         CalculatorSpace = findViewById(R.id.CalcSpace);
 
@@ -63,26 +66,30 @@ public class MainActivity extends AppCompatActivity {
         Button1 = findViewById(R.id.Button1);
         Button0 = findViewById(R.id.Button0);
 
+
+
+
         View.OnClickListener numbers = new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                String num1 = null;
-                String num2 = null;
 
-                String Text = null;
 
                 Button clickedbutton = (Button) v;
                 String PreParseNumber = clickedbutton.getText().toString();
                 //int FormatNum = Integer.parseInt(PreParseNumber);
                 //store to num1
-                if(operator == null){
+                if(Objects.equals(operator, "")){
                     num1 += PreParseNumber;
                     CalculatorSpace.setText(num1);
+                }
+                if (!operator.equals("")){
 
-                }
-                else {
+                    //reset color
+                    lastclicked.setTextColor(Color.WHITE);
                     num2 += PreParseNumber;
+                    CalculatorSpace.setText(num1 + " " + operator + " " +num2);
                 }
+
             }
         };
 
@@ -101,6 +108,18 @@ public class MainActivity extends AppCompatActivity {
                 String GetOp = clickedbutton.getText().toString();
                 //check if op is none and num1 is not none
                 //if true -> set operator to GetOp
+                if(!num1.equals("")){
+                    //change color of button (Green)
+                    //i have no clue of changing backgound color of the button without the app exploding
+                    clickedbutton.setTextColor(Color.GREEN);
+                    lastclicked = clickedbutton;
+                    operator = GetOp;
+                    CalculatorSpace.setText(num1 + " " + operator);
+
+
+                }
+
+               // if(num1 != null);
 
                 //operator = GetOp;
                 //else -> grey out the button
@@ -119,12 +138,48 @@ public class MainActivity extends AppCompatActivity {
               Button clickedbutton = (Button) v;
               String procedure = clickedbutton.getText().toString();
 
-              if(procedure == "Clear"){
+              if(procedure.equals("Clear")){
+                  num1 = "";
+                  num2 = "";
+                  operator = "";
                   //wipe
+                  CalculatorSpace.setText("Type a Calculation!");
 
-              }else if(procedure == "="){
-                  //calc
+                  //fix bug that just crashes app if num1 is empty and you press =
+              }else if(procedure.equals("=") && !num1.equals("")){
+
+                  //translate num1 and num2 to integers
+                  int num1calc = Integer.parseInt(num1);
+                  int num2calc = Integer.parseInt(num2);
+
+
+
+                  //add
+                  if(operator.equals("+")){
+                      String AnswerAdd = Integer.toString(num1calc + num2calc);
+                      CalculatorSpace.setText(AnswerAdd);
+
+                  }
+                  //sub
+                  if(operator.equals("-")){
+                      String AnswerSub = Integer.toString(num1calc - num2calc);
+                      CalculatorSpace.setText(AnswerSub);
+                  }
+
+                  //mult
+                  if(operator.equals("X")){
+                      String AnswerMult = Integer.toString(num1calc * num2calc);
+                      CalculatorSpace.setText(AnswerMult);
+                  }
+
+                  //divide
+                  if(operator.equals("/")){
+                      String AnswerDivide = Float.toString((float) num1calc / num2calc);
+                      CalculatorSpace.setText(AnswerDivide);
+                  }
               }
+
+
 
               //check if text is clear or =
               //if equals -> do the calculation and display to CalculatorSpace
@@ -133,6 +188,29 @@ public class MainActivity extends AppCompatActivity {
 
 
           }
+        };
+
+        View.OnLongClickListener EqualsClear = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Button clickedbutton = (Button) v;
+                String LongEqualsCheck = clickedbutton.getText().toString();
+                if (LongEqualsCheck.equals("=")) {
+                    num1 = "";
+                    num2 = "";
+                    operator = "";
+                    //wipe
+
+
+                    String messageResId = "Cleared!";
+                    Toast.makeText(v.getContext(), messageResId, Toast.LENGTH_SHORT).show();
+                    CalculatorSpace.setText("Type a Calculation!");
+
+                    return true;
+                }
+                return false;
+            }
+
         };
 
         //make on click listener for all buttons :
@@ -174,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButtonEquals.setOnClickListener(functions);
         ButtonClear.setOnClickListener(functions);
+        ButtonEquals.setOnLongClickListener(EqualsClear);
 
 
 

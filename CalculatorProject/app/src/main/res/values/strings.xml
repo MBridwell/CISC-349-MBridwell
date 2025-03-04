@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CalculatorProject</string>
+    <string name="Clear_toast">\"Cleared!\"</string>
 </resources>
