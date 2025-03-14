@@ -40,10 +40,9 @@ public class HolidaySongs {
         this.artist_name=artist_name;
     }
 
-    public double getdanceability() {
+    public Double getdanceability() {
         return danceability;
     }
-
     public void setdanceability(double danceability){
         this.danceability = danceability;
     }
