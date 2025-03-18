@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MongoDB + Flask</string>
+    <string name="add_customer">Add Customer!</string>
+    <string name="addcustomer">Add Customer</string>
+</resources>
