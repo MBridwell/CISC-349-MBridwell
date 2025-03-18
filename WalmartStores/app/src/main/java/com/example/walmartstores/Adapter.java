@@ -1,34 +1,25 @@
 package com.example.walmartstores;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 
 import java.util.ArrayList;
 
-
 public class Adapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<WalmartStores> arrayList;
-    private RequestQueue queue;
-    private TextView name, city, street_address, phone_number, store_code;
 
-
-
-    public Adapter (Context context, ArrayList<WalmartStores> arrayList, RequestQueue queue){
+    public Adapter(Context context, ArrayList<WalmartStores> arrayList, RequestQueue queue) {
         this.context = context;
         this.arrayList = arrayList;
-        this.queue = queue;
     }
-
-
 
     @Override
     public int getCount() {
@@ -47,15 +38,26 @@ public class Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.list,parent,false);
-        name = convertView.findViewById(R.id.name);
-        city = convertView.findViewById(R.id.city);
-        phone_number = convertView.findViewById(R.id.phone_number);
-        street_address = convertView.findViewById(R.id.street_address);
-        store_code = convertView.findViewById(R.id.store_code);
+
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.list, parent, false);
+        }
+
+
+        TextView name = convertView.findViewById(R.id.name);
+        TextView city = convertView.findViewById(R.id.city);
+        TextView phone_number = convertView.findViewById(R.id.phone_number);
+        TextView street_address = convertView.findViewById(R.id.street_address);
+        TextView store_code = convertView.findViewById(R.id.store_code);
+
+        WalmartStores store = arrayList.get(position);
+
+        name.setText(store.getName());
+        city.setText(store.getCity());
+        phone_number.setText(store.getPhone_number());
+        street_address.setText(store.getStreet_address());
+        store_code.setText(store.getStore_code());
 
         return convertView;
     }
-
-
 }
