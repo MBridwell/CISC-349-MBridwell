@@ -42,4 +42,13 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // CameraX core library
+    implementation("androidx.camera:camera-core:1.2.0")
+
+    // CameraX Camera2 implementation
+    implementation("androidx.camera:camera-camera2:1.2.0")
+
+    // CameraX View library for PreviewView
+    implementation("androidx.camera:camera-view:1.2.0")
+
 }
