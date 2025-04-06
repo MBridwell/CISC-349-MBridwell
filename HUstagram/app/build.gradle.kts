@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.hustagram"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -34,6 +34,7 @@ android {
 dependencies {
 
     implementation(libs.appcompat)
+    implementation("com.android.volley:volley:1.2.1")
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
@@ -50,5 +51,9 @@ dependencies {
 
     // CameraX View library for PreviewView
     implementation("androidx.camera:camera-view:1.2.0")
+
+    implementation ("androidx.camera:camera-camera2:1.0.0")
+    implementation ("androidx.camera:camera-lifecycle:1.0.0")
+    implementation ("androidx.camera:camera-view:1.0.0")
 
 }
