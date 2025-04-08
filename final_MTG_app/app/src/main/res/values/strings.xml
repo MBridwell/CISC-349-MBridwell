@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">final_MTG_app</string>
+    <string-array name="color_array">
+        <!-- Basic Colors -->
+        <item>White</item>
+        <item>Red</item>
+        <item>Black</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Colorless</item>
+        <!-- Two Color -->
+        <item>White Blue</item>
+        <item>Blue Black</item>
+        <item>Black Red</item>
+        <item>Green Red</item>
+        <item>White Black</item>
+        <item>Red Blue</item>
+        <item>Black Green</item>
+        <item>Red White</item>
+        <Item>Blue Green</Item>
+        <!-- Three Color -->
+        <item>White Green Blue</item>
+        <item>Blue White Black</item>
+        <item>Black Red Blue</item>
+        <item>Red Black White</item>
+        <item>Red Black Green</item>
+        <item>Green Red White</item>
+        <item>White Black Green</item>
+        <item>Blue Red White</item>
+        <item>Black Green Blue</item>
+        <item>Red White Black</item>
+        <item>Green Red Blue</item>
+        <!--Four Color -->
+        <item>Blue Black Red Green</item>
+        <Item>Black Red Green White</Item>
+        <item>Red Green White Blue</item>
+        <item>Green White Blue Black</item>
+        <item>white Blue Black Red</item>
+        <!--Five Color -->
+        <item>Red White Blue Green Black</item>
+    </string-array>
+</resources>
