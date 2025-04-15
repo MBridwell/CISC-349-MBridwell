@@ -1,15 +1,14 @@
 package com.example.final_mtg_app;
 
+import java.util.List;
+
 public class cardClass {
 
-    //what do i want info wise to be returned
-    //1. Color
-    //2. CMC
-    //3. Card Type
-    //4. Name
-    //5.imageLink ? ? ? ? ? LOL
-    private String cardColor, CMC, cardType, cardName, cardImage;
-    public cardClass(String cardColor, String CMC, String cardType, String cardName, String cardImage){
+    private String CMC, cardType, cardName, cardImage;
+    private List<String> cardColor;
+
+
+    public cardClass(List<String> cardColor, String CMC, String cardType, String cardName, String cardImage) {
         this.cardColor = cardColor;
         this.CMC = CMC;
         this.cardType = cardType;
@@ -17,37 +16,45 @@ public class cardClass {
         this.cardImage = cardImage;
     }
 
-
-    //getters
-    public String getCardColor() {
+    // getters
+    public List<String> getCardColor() {
         return cardColor;
     }
-    public String getCMC(){
+
+    public String getCMC() {
         return CMC;
     }
-    public String getCardType(){
+
+    public String getCardType() {
         return cardType;
     }
-    public String getCardName(){
+
+    public String getCardName() {
         return cardName;
     }
-    public String getCardImage(){
+
+    public String getCardImage() {
         return cardImage;
     }
-    //setters
-    public String setCardColor(String cardColor){
-        return this.cardColor = cardColor;
+
+    // setters
+    public void setCardColor(List<String> cardColor) {
+        this.cardColor = cardColor;
     }
-    public String setCMC(String CMC){
-        return this.CMC = CMC;
+
+    public void setCMC(String CMC) {
+        this.CMC = CMC;
     }
-    public String setCardType(String cardType){
-        return this.cardType = cardType;
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
     }
-    public String setCardName(String cardName){
-        return this.cardName = cardName;
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
     }
-    public String setCardImage(String cardImage){
-        return this.cardImage = cardImage;
+
+    public void setCardImage(String cardImage) {
+        this.cardImage = cardImage;
     }
 }

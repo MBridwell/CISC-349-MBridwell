@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--Edit text fields for number of card type, maybe other options later? -->
 
@@ -11,64 +12,87 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Lands?"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/numCreatures"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Creatures?"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="201dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numLands"/>
 
     <EditText
         android:id="@+id/numInstants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Instants?"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="275dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numCreatures"/>
 
     <EditText
         android:id="@+id/numSorceries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Sorceries?"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="354dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numInstants" />
 
     <EditText
         android:id="@+id/numEnchantments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Enchantments?"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="438dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numSorceries" />
 
     <EditText
         android:id="@+id/numArtifacts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Artifacts?"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="105dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numEnchantments" />
 
     <EditText
         android:id="@+id/numPlaneswalker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="How Many Planeswalkers?"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="531dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numArtifacts" />
 
     <Button
         android:id="@+id/submit_filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit Filter"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="633dp" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numPlaneswalker" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
