@@ -32,7 +32,7 @@ import java.util.List;
 
 public class CommanderSelector extends AppCompatActivity {
     //url String
-    String url = "http://10.2.105.189:5000/get_commander";
+    String url = "http://10.2.97.180:5000/get_commander";
 
     NetworkImageView commander_viewer;
 

@@ -59,7 +59,6 @@ public class CardTypePage extends AppCompatActivity {
         EditText numPlaneswalker = findViewById(R.id.numPlaneswalker);
         //button
         Button submitButton = findViewById(R.id.submit_filter);
-        ArrayList<String> combined = new ArrayList<String>();
 
 
 
@@ -67,148 +66,94 @@ public class CardTypePage extends AppCompatActivity {
 
 
         submitButton.setOnClickListener(v -> {
-            //read and pass data to next page. . .
-            //pass commander information, pass number of cards, etc
-            //get data: should return an int that does not exceed 99...
             int lands = Integer.parseInt(numLands.getText().toString());
             int artifacts = Integer.parseInt(numArtifacts.getText().toString());
             int creatures = Integer.parseInt(numCreatures.getText().toString());
             int enchantments = Integer.parseInt(numEnchantments.getText().toString());
             int sorceries = Integer.parseInt(numSorceries.getText().toString());
-
             int instants = Integer.parseInt(numInstants.getText().toString());
             int planeswalkers = Integer.parseInt(numPlaneswalker.getText().toString());
-
-
-
 
             int totalCards = lands + artifacts + creatures + enchantments + sorceries + instants + planeswalkers;
             if (totalCards != 99) {
                 throw new Error("Total cards do not add to 100");
             }
 
-            //try + catch this to make sure its 99 cards.
-            //once done and verified, request JSONArrays of n size where n is the number of lands, artifacts, creatures, enchatments, sorceries, instants, and planeswalkers.
-            //will need additional endpoints for this, unless you can pass params into endpoint requeusts.
+            ArrayList<String> combined = new ArrayList<>();
 
-            //JSON requests
-            if (commanderColor.size() > 1){
+            if (commanderColor.size() > 1) {
+                jsonrequest(commanderColor, "land", lands, list1 -> {
+                    combined.addAll(list1);
 
-                String Landurldualormore = "http://10.2.105.189:5000/get_cards/" + convertColorListToUrlParam(commanderColor) + "/land/" + lands;
-                Log.d("URL", Landurldualormore);
+                    jsonrequest(commanderColor, "artifact", artifacts, list2 -> {
+                        combined.addAll(list2);
 
-                jsonrequest(commanderColor, "Land", lands, new CardListCallback() {
+                        jsonrequest(commanderColor, "creature", creatures, list3 -> {
+                            combined.addAll(list3);
 
-                    @Override
-                    public void onCardsReceived(List<String> list) {
-                        Log.d("LandCards", list.toString());
-                    }
+                            jsonrequest(commanderColor, "enchantment", enchantments, list4 -> {
+                                combined.addAll(list4);
+
+                                jsonrequest(commanderColor, "sorcery", sorceries, list5 -> {
+                                    combined.addAll(list5);
+
+                                    jsonrequest(commanderColor, "instant", instants, list6 -> {
+                                        combined.addAll(list6);
+
+                                        jsonrequest(commanderColor, "planeswalker", planeswalkers, list7 -> {
+                                            combined.addAll(list7);
+
+
+                                            Intent intent = new Intent(CardTypePage.this, FinalView.class);
+                                            intent.putStringArrayListExtra("combined", combined);
+                                            startActivity(intent);
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
                 });
-            } else if (commanderColor.size() < 2){
-                String Landurlbasic = "http://10.2.105.189:5000/"+ convertColorListToUrlParam(commanderColor) + "/Basic/" + lands;
-                Log.d("URL", Landurlbasic);
-                jsonrequest(commanderColor, "basic", lands, new CardListCallback() {
+            } else {
+                jsonrequest(commanderColor, "basic", lands, list1 -> {
+                    combined.addAll(list1);
 
-                    @Override
-                    public void onCardsReceived(List<String> list) {
-                        Log.d("LandCards", list.toString());
-                    }
+                    jsonrequest(commanderColor, "artifact", artifacts, list2 -> {
+                        combined.addAll(list2);
+
+                        jsonrequest(commanderColor, "creature", creatures, list3 -> {
+                            combined.addAll(list3);
+
+                            jsonrequest(commanderColor, "enchantment", enchantments, list4 -> {
+                                combined.addAll(list4);
+
+                                jsonrequest(commanderColor, "sorcery", sorceries, list5 -> {
+                                    combined.addAll(list5);
+
+                                    jsonrequest(commanderColor, "instant", instants, list6 -> {
+                                        combined.addAll(list6);
+
+                                        jsonrequest(commanderColor, "planeswalker", planeswalkers, list7 -> {
+                                            combined.addAll(list7);
+
+                                            Intent intent = new Intent(CardTypePage.this, FinalView.class);
+                                            intent.putStringArrayListExtra("combined", combined);
+                                            startActivity(intent);
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
                 });
-
             }
-
-
-     //      String artifactsURL = "http://10.2.105.189:5000/"+ commanderColor + "/get_cards/artifact/" + artifacts;
-     //      jsonrequest(commanderColor,"artifact", artifacts, new CardListCallback() {
-     //          @Override
-     //          public void onCardsReceived(List<String> list) {
-
-     //              Log.d("artifactCards", list.toString());
-     //              combined.addAll(list);
-
-
-     //          }
-     //      });
-
-
-            String creaturesURL = "http://10.2.105.189:5000/"+ commanderColor + "/get_cards/creature/" + creatures;
-            jsonrequest(commanderColor,"creature", creatures, new CardListCallback() {
-                @Override
-                public void onCardsReceived(List<String> list) {
-
-                    Log.d("creatureCards", list.toString());
-
-
-                }
-            });
-
-
-
-            String enchantmentsURL = "http://10.2.105.189:5000/"+ commanderColor + "/get_cards/enchantment/" + enchantments;
-            jsonrequest(commanderColor,"enchantment", enchantments, new CardListCallback() {
-                @Override
-                public void onCardsReceived(List<String> list) {
-
-                    Log.d("enchCards", list.toString());
-
-
-                }
-            });
-
-
-            String sorceriesURL = "http://10.2.105.189:5000/"+ commanderColor + "/get_cards/sorcery/" + sorceries;
-            jsonrequest(commanderColor, "sorcery", sorceries, new CardListCallback() {
-                @Override
-                public void onCardsReceived(List<String> list) {
-
-                    Log.d("sorCards", list.toString());
-
-
-                }
-            });
-
-
-            String instantsURL = "http://10.2.105.189:5000/"+ commanderColor + "/get_cards/instant/" + instants;
-
-            jsonrequest(commanderColor, "instant", instants, new CardListCallback() {
-                @Override
-                public void onCardsReceived(List<String> list) {
-
-                    Log.d("insCards", list.toString());
-
-
-                }
-            });
-            String planeswalkersURL = "http://10.2.105.189:5000/"+ commanderColor + "/get_cards/planeswalker/" + planeswalkers;
-            jsonrequest(commanderColor, "planeswalker", planeswalkers, new CardListCallback() {
-                @Override
-                public void onCardsReceived(List<String> list) {
-
-                    Log.d("pwalkCards", list.toString());
-
-                }
-            });
-
-
-            Log.d("Combined", combined.toString());
-
-            Intent intent = new Intent(CardTypePage.this, FinalView.class);
-            intent.putStringArrayListExtra("combined", combined);
-            //intent.putStringArrayListExtra("COLOR", (ArrayList<String>) commanderColor);
-
-            startActivity(intent);
-
-
-
-
-
         });
 
     }
 
     private void jsonrequest(List<String> commanderColorList, String type, int numNeeded, CardListCallback callback) {
         String colorParam = convertColorListToUrlParam(commanderColorList);
-        String url = "http://10.2.105.189:5000/get_cards/" + colorParam + "/" + type + "/" + numNeeded;
+        String url = "http://10.2.97.180:5000/get_cards/" + colorParam + "/" + type + "/" + numNeeded;
 
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.start();
